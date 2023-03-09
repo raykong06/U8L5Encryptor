@@ -80,32 +80,30 @@ public class Encryptor
     public String encryptMessage(String message)
     {
         String encryptedMessage = "";
-        if (!message.equals(""))
+        int length = message.length() / (numRows * numCols);
+        if (message.length() - length > 0)
         {
-            int length = message.length() / (numRows * numCols);
-            if (message.length() - length > 0)
-            {
-                length++;
-            }
-            int interval = numRows * numCols;
-            int i = 0;
-            while (i < length)
+            length++;
+        }
+        int interval = numRows * numCols;
+        int i = 0;
+        while (i < length)
+        {
+            if (!message.equals(""))
             {
                 if (i == length - 1)
                 {
-                    fillBlock(message.substring(interval - (numRows * numCols)));
+                    fillBlock(message);
                 }
                 else
                 {
-                    fillBlock(message.substring(interval - (numRows * numCols), interval));
+                    fillBlock(message.substring(0, interval));
+                    message = message.substring(interval);
                 }
-                interval += numRows * numCols;
                 encryptedMessage += encryptBlock();
-                i++;
             }
-            //encryptedMessage = encryptedMessage.substring(0,message.length());
+            i++;
         }
-
         return encryptedMessage;
     }
 
@@ -133,7 +131,57 @@ public class Encryptor
      */
     public String decryptMessage(String encryptedMessage)
     {
-        /* to be implemented in part (d) */
-        return "";
+        String decryptedMessage = "";
+        int length = encryptedMessage.length() / (numCols * numRows);
+        int i = 0;
+        while (i < length)
+        {
+            if (!encryptedMessage.equals(""))
+            {
+                String[][] block = fillDecryptBlock(encryptedMessage.substring(0, numCols * numRows));
+                encryptedMessage = encryptedMessage.substring(numCols * numRows);
+                for (String[] r : block)
+                {
+                    for (String c : r)
+                    {
+                        decryptedMessage += c;
+                    }
+                }
+            }
+            i++;
+        }
+        int idx = decryptedMessage.length();
+        boolean end = true;
+        while (idx > 0 && end)
+        {
+            if (!(decryptedMessage.substring(idx - 1, idx).equals("A")))
+            {
+                end = false;
+            }
+            else
+            {
+                idx--;
+            }
+        }
+        if (!end)
+        {
+            decryptedMessage = decryptedMessage.substring(0, idx);
+        }
+        return decryptedMessage;
+    }
+
+    private String[][] fillDecryptBlock(String str)
+    {
+        String[][] block = new String[numRows][numCols];
+        int i = 0;
+        for (int c = 0; c < numCols; c++)
+        {
+            for (int r = 0; r < numRows; r++)
+            {
+                block[r][c] = str.substring(i, i + 1);
+                i++;
+            }
+        }
+        return block;
     }
 }
