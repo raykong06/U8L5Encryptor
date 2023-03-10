@@ -186,8 +186,9 @@ public class Encryptor
     }
 
     // Super Encryptor
-    public String superEncryptMessage(String message)
+    public String superEncryptMessage(String message, int cipherShift, int rowShift, int colShift)
     {
+        String cipheredMessage = caesarCipher(message, cipherShift);
         return null;
     }
 
@@ -216,6 +217,18 @@ public class Encryptor
             newMessage += character;
         }
         return newMessage;
+    }
+
+    public String[][] rowShift(String[][] arr, int shift)
+    {
+        String[][] newArr = new String[arr.length][arr[0].length];
+        for (int r = 0; r < arr.length; r++)
+        {
+            String[] row = arr[r];
+            int newRow = (r + shift) % arr.length;
+            newArr[newRow] = row;
+        }
+        return newArr;
     }
 
     private String undoCaesarCipher(String message, int shift)
