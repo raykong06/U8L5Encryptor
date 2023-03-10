@@ -2,18 +2,22 @@ public class SuperEncryptor {
     int cipherShift;
     int rowShift;
     int colShift;
-    public SuperEncryptor(int cipherShift, int rowShift, int colShift)
+    int numRows;
+    int numCols;
+    public SuperEncryptor(int cipherShift, int rowShift, int colShift, int numRows, int numCols)
     {
         this.cipherShift = cipherShift;
         this.rowShift = rowShift;
         this.colShift = colShift;
+        this.numRows = numRows;
+        this.numCols = numCols;
     }
 
     // Super Encryptor
     public String superEncryptMessage(String message)
     {
         String cipheredMessage = caesarCipher(message, cipherShift);
-        String[][] arr =
+        String[][] arr = strToArr(cipheredMessage);
         return null;
     }
 
@@ -58,7 +62,7 @@ public class SuperEncryptor {
 
     private String[][] strToArr(String str)
     {
-        int numRows =
+        String[][] arr = new String[numRows][numCols];
         int i = 0;
         for (int r = 0; r < numRows; r++)
         {
@@ -73,10 +77,11 @@ public class SuperEncryptor {
                 {
                     add = "A";
                 }
-                letterBlock[i / numCols][i % numCols] = add;
+                arr[i / numCols][i % numCols] = add;
                 i++;
             }
         }
+        return arr;
     }
 
     private String undoCaesarCipher(String message, int shift)
