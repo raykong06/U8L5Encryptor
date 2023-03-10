@@ -184,4 +184,64 @@ public class Encryptor
         }
         return block;
     }
+
+    // Super Encryptor
+    public String superEncryptMessage(String message)
+    {
+        return null;
+    }
+
+    private String caesarCipher(String message, int shift)
+    {
+        String capitalLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String lowerLetters = "abcdefghijklmnopqrstuvwxyz";
+
+        String newMessage = "";
+
+        shift = shift % 26;
+
+        for (int i = 0; i < message.length(); i++)
+        {
+            String character = message.substring(i, i + 1);
+            if (capitalLetters.indexOf(character) != -1)
+            {
+                int charShiftIndex = (capitalLetters.indexOf(character) + shift) % 26;
+                character = capitalLetters.substring(charShiftIndex, charShiftIndex + 1);
+            }
+            else if (lowerLetters.indexOf(character) != -1)
+            {
+                int charShiftIndex = (lowerLetters.indexOf(character) + shift) % 26;
+                character = lowerLetters.substring(charShiftIndex, charShiftIndex + 1);
+            }
+            newMessage += character;
+        }
+        return newMessage;
+    }
+
+    private String undoCaesarCipher(String message, int shift)
+    {
+        String capitalLetters = "ZYXWVUTSRQPONMLKJIHGFEDCBA";
+        String lowerLetters = "zyxwvutsrqponmlkjihgfedcba";
+
+        String newMessage = "";
+
+        shift = shift % 26;
+
+        for (int i = 0; i < message.length(); i++)
+        {
+            String character = message.substring(i, i + 1);
+            if (capitalLetters.indexOf(character) != -1)
+            {
+                int charShiftIndex = (capitalLetters.indexOf(character) + shift) % 26;
+                character = capitalLetters.substring(charShiftIndex, charShiftIndex + 1);
+            }
+            else if (lowerLetters.indexOf(character) != -1)
+            {
+                int charShiftIndex = (lowerLetters.indexOf(character) + shift) % 26;
+                character = lowerLetters.substring(charShiftIndex, charShiftIndex + 1);
+            }
+            newMessage += character;
+        }
+        return newMessage;
+    }
 }
