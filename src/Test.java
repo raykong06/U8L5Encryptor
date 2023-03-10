@@ -10,12 +10,6 @@ public class Test {
                 "nOgn lly hmei sssu nt w hsetna ritts wt\n" +
                 "oO nslnyo kun olwo vyeo hne ry owuh elegto AhAeArA A\n"));
 
-        String[][] arr = {
-                {"a","b","c"},
-                {"d","e","f"},
-                {"g","h","i"},
-                {"j","k","l"}};
-        print2DArray(ec.rowShift(arr, 5));
     }
 
     public static void print2DArray(String[][] arr)

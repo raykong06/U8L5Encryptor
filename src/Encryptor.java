@@ -189,6 +189,7 @@ public class Encryptor
     public String superEncryptMessage(String message, int cipherShift, int rowShift, int colShift)
     {
         String cipheredMessage = caesarCipher(message, cipherShift);
+        String[][] arr =
         return null;
     }
 
@@ -219,7 +220,7 @@ public class Encryptor
         return newMessage;
     }
 
-    public String[][] rowShift(String[][] arr, int shift)
+    private String[][] rowShift(String[][] arr, int shift)
     {
         String[][] newArr = new String[arr.length][arr[0].length];
         for (int r = 0; r < arr.length; r++)
@@ -229,6 +230,29 @@ public class Encryptor
             newArr[newRow] = row;
         }
         return newArr;
+    }
+
+    private String[][] strToArr(String str)
+    {
+        int numRows =
+        int i = 0;
+        for (int r = 0; r < numRows; r++)
+        {
+            for (int c = 0; c < numCols; c++)
+            {
+                String add;
+                if (i < str.length())
+                {
+                    add = str.substring(i, i + 1);
+                }
+                else
+                {
+                    add = "A";
+                }
+                letterBlock[i / numCols][i % numCols] = add;
+                i++;
+            }
+        }
     }
 
     private String undoCaesarCipher(String message, int shift)
